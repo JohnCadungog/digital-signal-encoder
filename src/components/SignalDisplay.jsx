@@ -1,4 +1,3 @@
-// src/components/SignalDisplay.js
 import React from 'react';
 import SignalChart from './SignalChart';
 import { Typography } from '@mui/material';

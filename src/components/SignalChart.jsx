@@ -1,4 +1,3 @@
-// src/components/SignalChart.js
 import React from 'react';
 import { Line } from 'react-chartjs-2';
 import { Chart as ChartJS, LineElement, CategoryScale, LinearScale, PointElement, Tooltip } from 'chart.js';
@@ -6,7 +5,6 @@ import { Chart as ChartJS, LineElement, CategoryScale, LinearScale, PointElement
 ChartJS.register(LineElement, CategoryScale, LinearScale, PointElement, Tooltip);
 
 function SignalChart({ encodedSignal, encodingType, binaryData }) {
-  // Data object for Chart.js
   const data = {
     labels: binaryData.split(''),
     datasets: [
@@ -22,7 +20,6 @@ function SignalChart({ encodedSignal, encodingType, binaryData }) {
     ],
   };
 
-  // Configuration for the line chart
   const options = {
     responsive: true,
     plugins: {
@@ -31,7 +28,7 @@ function SignalChart({ encodedSignal, encodingType, binaryData }) {
         position: 'top',
       },
       tooltip: {
-        enabled: false, // Disable default tooltip for clarity
+        enabled: false,
       },
     },
     scales: {
@@ -47,7 +44,7 @@ function SignalChart({ encodedSignal, encodingType, binaryData }) {
           text: 'Signal Level',
         },
         ticks: {
-          stepSize: 1, // Adjust depending on encoding
+          stepSize: 1,
         },
       },
     },
