@@ -169,18 +169,16 @@ const DigitalSignalEncoder = () => {
           >
             <CartesianGrid strokeDasharray="3 3" />
             <XAxis
-  dataKey="index"
-  ticks={Array.from({ length: binaryInput.length * (isManchester ? 2 : 1) }, (_, i) => i)}
-  tickFormatter={(value) => {
-    if (isManchester) {
-      // For Manchester and Differential Manchester encoding, display the binary value at the center of each pair of steps.
-      return value % 2 === 0 ? binaryInput[Math.floor(value / 2)] : '';
-    }
-    return binaryInput[value] || '';
-  }}
-  tick={{ dy: 10, dx: 44 }} // Adjust `dx` to move the label to the center
-/>
-
+              dataKey="index"
+              ticks={Array.from({ length: binaryInput.length * (isManchester ? 2 : 1) }, (_, i) => i)}
+              tickFormatter={(value) => {
+                if (isManchester) {
+                  return value % 2 === 0 ? binaryInput[Math.floor(value / 2)] : '';
+                }
+                return binaryInput[value] || '';
+              }}
+              tick={{ dy: 10 }}
+            />
             <YAxis domain={[-1.5, 1.5]} ticks={[-1, 0, 1]} />
             <ReferenceLine y={0} stroke="#666" />
             <Line
