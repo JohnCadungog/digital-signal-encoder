@@ -1,56 +1,39 @@
-import React, { useState } from 'react';
-import InputForm from './components/InputForm';
-import EncodingButtons from './components/EncodingButtons';
-import SignalDisplay from './components/SignalDisplay';
-import {
-  encodeNRZL,
-  encodeNRZI,
-  encodeBipolarAMI,
-  encodePseudoternary,
-  encodeManchester,
-  encodeDifferentialManchester
-} from './encodingFunctions';
-import { Container, Typography } from '@mui/material';
+// App.js
+import React from 'react';
+import { CssBaseline, Container, Typography, Paper, ThemeProvider, createTheme } from '@mui/material';
+import DigitalSignalChart from './DigitalSignalChart';
+import BinaryEncoder from './BinaryEncoder'; 
+
+const darkTheme = createTheme({
+  palette: {
+    mode: 'dark',
+    background: {
+      default: '#121212',
+      paper: '#1e1e1e',
+    },
+    text: {
+      primary: '#FFFFFF',
+      secondary: '#CCCCCC',
+    },
+    primary: {
+      main: '#a366ff',
+    },
+  },
+});
 
 function App() {
-  const [binaryData, setBinaryData] = useState('');
-  const [encodingType, setEncodingType] = useState(null);
-  const [encodedSignal, setEncodedSignal] = useState([]);
-
-  const handleEncode = () => {
-    switch (encodingType) {
-      case 'NRZ-L':
-        setEncodedSignal(encodeNRZL(binaryData));
-        break;
-      case 'NRZ-I':
-        setEncodedSignal(encodeNRZI(binaryData));
-        break;
-      case 'Bipolar AMI':
-        setEncodedSignal(encodeBipolarAMI(binaryData));
-        break;
-      case 'Pseudoternary':
-        setEncodedSignal(encodePseudoternary(binaryData));
-        break;
-      case 'Manchester':
-        setEncodedSignal(encodeManchester(binaryData));
-        break;
-      case 'Differential Manchester':
-        setEncodedSignal(encodeDifferentialManchester(binaryData));
-        break;
-      default:
-        setEncodedSignal([]);
-    }
-  };
-
   return (
-    <Container maxWidth="sm" style={{ textAlign: 'center', padding: '20px' }}>
-      <Typography variant="h4" gutterBottom>
-        Digital Signal Encoder
-      </Typography>
-      <InputForm binaryData={binaryData} setBinaryData={setBinaryData} />
-      <EncodingButtons setEncodingType={setEncodingType} handleEncode={handleEncode} />
-      <SignalDisplay encodedSignal={encodedSignal} encodingType={encodingType} binaryData={binaryData} />
-    </Container>
+    <ThemeProvider theme={darkTheme}>
+      <CssBaseline />
+      <Container maxWidth="md" sx={{ py: 4 }}>
+        <Paper elevation={3} sx={{ p: 4, borderRadius: 2 }}>
+          <Typography variant="h4" component="h1" align="center" gutterBottom color="primary">
+            Digital Signal (NRZI Encoding)
+          </Typography>
+          <BinaryEncoder />
+        </Paper>
+      </Container>
+    </ThemeProvider>
   );
 }
 
